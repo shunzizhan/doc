@@ -118,6 +118,24 @@ showOtherVideo(){
 	},1000)
 }
 ```
+修正一下，感觉这样弄个定时器，感觉很low,`video`有个事件，可以监测视频是否播放完毕，
+``` javaScript
+	let _this = this;
+		_this._dom = document.getElementById('myvideo');
+		_this._dom.addEventListener('ended', function (e) {
+			// 播放结束时触发
+			if(_this.count>0){
+				_this.skip(); //当播放完第二个视频进入主页面
+			}else{
+				_this.count += 1;
+				_this._dom.removeAttribute('autoplay');
+				_this.videoSrc = _this.testObj[1].videoSrc;
+				_this.videoImg = _this.testObj[1].videoImg;
+				_this.isPlay = false;
+			}
+			
+		})
+```
 
 ### 总结
 只要思路不滑坡，办法总比问题多
